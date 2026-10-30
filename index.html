@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Төрсөн өдрийн мэнд, Номин-Эрдэнэ</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Marck+Script&display=swap">
+<style>
+:root{--bg1:#fff;--bg2:#fff;--bg3:#fffafc;--ink:#6b2a4d;--soft:#a8648a;--rose:#f59cc2;--plum:#dc5894;--card:rgba(255,255,255,.82);--edge:rgba(240,130,175,.4);
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media (prefers-color-scheme:dark){:root[data-theme="dark"]{--bg1:#2e1426;--bg2:#451c36;--bg3:#2a1220;--ink:#ffe8f2;--soft:#f0bad3;--card:rgba(69,28,54,.72);--edge:rgba(246,166,200,.4);color-scheme:dark}}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:radial-gradient(120% 90% at 20% 0%,var(--bg1),var(--bg2) 55%,var(--bg3));color:var(--ink);font-family:"Cormorant Garamond","Times New Roman",serif;overflow:hidden;position:relative;-webkit-tap-highlight-color:transparent}
+#fall{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.petal{position:absolute;top:-30px;width:14px;height:14px;border-radius:150% 0 150% 0;background:linear-gradient(135deg,#fff,var(--rose));opacity:.75;animation:drop linear infinite}
+@keyframes drop{to{transform:translate(var(--dx),110vh) rotate(var(--r))}}
+.stage{position:fixed;inset:0;display:grid;place-items:center;padding:24px;z-index:1;transition:opacity .9s ease,transform .9s ease}
+.hero{text-align:center;max-width:520px}
+.hero .sm{font-size:clamp(18px,4.6vw,22px);font-style:italic;color:var(--soft);letter-spacing:.04em;margin:0}
+.name{font-family:"Marck Script","Cormorant Garamond",cursive;font-size:clamp(46px,14vw,92px);line-height:1.1;margin:.1em 0 .25em;background:linear-gradient(100deg,var(--plum),var(--rose) 50%,var(--plum));background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:sheen 5s ease-in-out infinite}
+@keyframes sheen{50%{background-position:100% 0}}
+.bow{width:min(60vw,250px);height:auto;display:block;margin:0 auto;filter:drop-shadow(0 12px 18px rgba(225,95,150,.26));animation:float 4s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-8px)}}
+.bow .loop{transform-box:fill-box;animation:breathe 3.2s ease-in-out infinite}
+.bow .l{transform-origin:100% 50%}.bow .r{transform-origin:0 50%;animation-delay:.15s}
+@keyframes breathe{50%{transform:scale(1.045)}}
+button{font:inherit;cursor:pointer}
+.open{margin-top:1.1rem;padding:.85rem 2.1rem;font-size:1.25rem;letter-spacing:.03em;color:#fff;border:0;border-radius:999px;background:linear-gradient(120deg,var(--rose),var(--plum));box-shadow:0 10px 24px rgba(225,95,150,.38);position:relative;overflow:hidden;transition:transform .25s}
+.open:hover{transform:scale(1.05)}
+.open::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.6),transparent);transform:skewX(-20deg);animation:glint 3.2s infinite}
+@keyframes glint{60%,100%{left:130%}}
+button:focus-visible{outline:3px solid var(--plum);outline-offset:3px}
+.opened .stage.s1{opacity:0;transform:translateY(-40px) scale(.9);pointer-events:none}
+.s2{opacity:0;pointer-events:none;overflow:auto}
+.opened .s2{opacity:1;pointer-events:auto;transition-delay:.5s}
+.card{position:relative;max-width:560px;width:100%;margin:auto;padding:68px 30px 30px;background:var(--card);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--edge);border-radius:30px;box-shadow:0 30px 70px rgba(225,95,150,.22);text-align:center;transform:translateY(60px) scale(.94);transition:transform 1.1s cubic-bezier(.2,.9,.25,1) .5s}
+.opened .card{transform:none}
+.card .bow{position:absolute;top:-52px;left:50%;width:120px;margin-left:-60px;animation:none;transform:scale(.2) rotate(-25deg);opacity:0;transition:transform 1.2s cubic-bezier(.3,1.6,.4,1) 1s,opacity .5s 1s}
+.opened .card .bow{transform:none;opacity:1}
+.card h2{font-family:"Marck Script","Cormorant Garamond",cursive;font-weight:400;font-size:clamp(30px,8vw,42px);margin:0 0 .5em;color:var(--plum)}
+.card p{font-size:clamp(19px,4.8vw,23px);line-height:1.55;margin:0 0 .9em;color:var(--ink)}
+.line{opacity:0;transform:translateY(14px);filter:blur(4px)}
+.opened .line{animation:in .9s ease forwards;animation-delay:calc(1.6s + var(--i)*.75s)}
+@keyframes in{to{opacity:1;transform:none;filter:none}}
+.big{font-size:clamp(26px,7vw,34px)!important;font-style:italic;font-weight:600;background:linear-gradient(100deg,var(--plum),var(--rose));-webkit-background-clip:text;background-clip:text;color:transparent!important}
+.sign{font-family:"Marck Script",cursive;font-size:28px;color:var(--soft)}
+.again{margin-top:.6rem;background:none;border:1px solid var(--edge);color:var(--soft);border-radius:999px;padding:.4rem 1.2rem;font-size:1rem}
+.hint{font-size:.95rem;font-style:italic;color:var(--soft);opacity:.8}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01s!important;animation-iteration-count:1!important;transition-duration:.01s!important;transition-delay:0s!important}.line{animation-delay:0s!important}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<defs>
+<linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff2f8"/><stop offset=".5" stop-color="#f8aacb"/><stop offset="1" stop-color="#e5679f"/></linearGradient>
+<linearGradient id="h" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity=".7"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+<symbol id="bow" viewBox="0 0 200 210">
+<path d="M96 108C82 150 66 176 50 198l24-6 12 12c8-30 13-60 14-92z" fill="url(#g)"/>
+<path d="M104 108c14 42 30 68 46 90l-24-6-12 12c-8-30-13-60-14-92z" fill="url(#g)"/>
+<g class="loop l"><path d="M100 100C62 36 6 48 14 100c-8 54 48 62 86 0z" fill="url(#g)"/><path d="M92 98C66 56 34 60 32 98" fill="none" stroke="url(#h)" stroke-width="5" stroke-linecap="round"/></g>
+<g class="loop r"><path d="M100 100c38-64 94-52 86 0 8 54-48 62-86 0z" fill="url(#g)"/><path d="M108 98c26-42 58-38 60 0" fill="none" stroke="url(#h)" stroke-width="5" stroke-linecap="round"/></g>
+<ellipse cx="100" cy="100" rx="15" ry="18" fill="#cf4a88"/><ellipse cx="96" cy="94" rx="5" ry="7" fill="#fff" opacity=".5"/>
+</symbol>
+</defs>
+</svg>
+<div id="fall" aria-hidden="true"></div>
+
+<main id="app">
+<section class="stage s1">
+<div class="hero">
+<svg class="bow" viewBox="0 0 200 210" aria-hidden="true"><use href="#bow"/></svg>
+<p class="sm">Төрсөн өдрийн мэнд</p>
+<h2 class="name">Номин-Эрдэнэ</h1>
+<button class="open" id="open">Нээж үзэх</button>
+</div>
+</section>
+
+<section class="stage s2">
+<article class="card">
+<svg class="bow" viewBox="0 0 200 210" aria-hidden="true"><use href="#bow"/></svg>
+<h2 class="line" style="--i:0">Хайрт Эхнэр минь,</h2>
+<p class="line" style="--i:1">Чамдаа төрсөн өдрийн мэндийг хүргэе!</p>
+<p class="line" style="--i:2">Маш их хайртай шүү. Анх учирснаас хойш 672 хоног өнгөрсөн юм байна. 
+    Энэ өдрүүдийг, ирээдүйн бидний хамтдаа байх өдөр бүрийг чи минь гэрэлтүүлдэг шүү🌸.</p>
+<p class="line" style="--i:3">Миний хөөрхөн хайр үнэхээр мундаг шүү. Чамдаа хязгааргүй их хайртай шүү. </p>
+<p class="line big" style="--i:4">Төрсөн өдрийн мэнд, хайрт минь! Үнсэе Kiss kiss ❤️</p>
+    <p class="line big" style="--i:4">
+    2 4 7</p>
+
+<button class="line again" style="--i:7" id="again">Дахин үзэх</button>
+</article>
+</section>
+</main>
+
+<script>
+(function(){
+var fall=document.getElementById('fall'),body=document.body;
+var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function rnd(a,b){return a+Math.random()*(b-a)}
+if(!reduce){for(var i=0;i<16;i++){var p=document.createElement('i');p.className='petal';
+p.style.left=rnd(0,100)+'vw';var s=rnd(8,18);p.style.width=p.style.height=s+'px';
+p.style.setProperty('--dx',rnd(-120,120)+'px');p.style.setProperty('--r',rnd(240,720)+'deg');
+p.style.animationDuration=rnd(9,18)+'s';p.style.animationDelay=(-rnd(0,18))+'s';fall.appendChild(p)}}
+function burst(x,y,n){
+if(reduce||!Element.prototype.animate)return;
+for(var i=0;i<n;i++){var e=document.createElement('i');e.className='petal';e.style.cssText='animation:none;top:0;left:0;position:fixed;pointer-events:none;z-index:5;opacity:1';
+var s=rnd(9,20);e.style.width=e.style.height=s+'px';
+if(i%4===0){e.style.background='#fff';e.style.boxShadow='0 0 8px #ffc2dc'}
+document.body.appendChild(e);
+var a=rnd(0,Math.PI*2),d=rnd(60,200),dx=Math.cos(a)*d,dy=Math.sin(a)*d-rnd(40,120);
+e.animate([{transform:'translate('+x+'px,'+y+'px) scale(.3) rotate(0)',opacity:1},
+{transform:'translate('+(x+dx)+'px,'+(y+dy)+'px) scale(1) rotate('+rnd(90,300)+'deg)',opacity:1,offset:.45},
+{transform:'translate('+(x+dx*1.2)+'px,'+(y+dy+rnd(200,380))+'px) scale(.8) rotate('+rnd(400,800)+'deg)',opacity:0}],
+{duration:rnd(1800,3000),easing:'cubic-bezier(.2,.7,.3,1)'}).onfinish=(function(el){return function(){el.remove()}})(e)}}
+document.getElementById('open').addEventListener('click',function(ev){
+var r=ev.currentTarget.getBoundingClientRect();
+burst(r.left+r.width/2,r.top+r.height/2,46);
+body.classList.add('opened');
+setTimeout(function(){burst(innerWidth/2,innerHeight*.25,36)},1300);
+});
+document.getElementById('again').addEventListener('click',function(){
+body.classList.remove('opened');
+});
+document.addEventListener('pointerdown',function(ev){
+if(body.classList.contains('opened')&&!ev.target.closest('button'))burst(ev.clientX,ev.clientY,18)});
+})();
+</script>
+</body>
+</html>
